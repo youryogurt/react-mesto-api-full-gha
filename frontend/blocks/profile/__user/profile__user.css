@@ -1,0 +1,15 @@
+.profile__user {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 22px;
+  margin-bottom: 14px;
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .profile__user {
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
+}

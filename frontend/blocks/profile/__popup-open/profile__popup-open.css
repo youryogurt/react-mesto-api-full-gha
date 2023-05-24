@@ -1,0 +1,24 @@
+.profile__popup-open {
+  background-size: 7.5px 7.5px;
+  background-image: url("../../../images/edit-button.svg");
+  width: 18px;
+  height: 18px;
+  border: 1px solid #FFFFFF;
+  position: absolute;
+  right: -36px;
+  top: 10px;
+}
+
+.profile__popup-open:hover {
+  opacity: .5;
+}
+
+@media screen and (min-width: 768px) {
+  .profile__popup-open {
+    background-size: 10px 10px;
+    width: 24px;
+    height: 24px;
+    right: -40px;
+    top: 16px;
+  }
+}

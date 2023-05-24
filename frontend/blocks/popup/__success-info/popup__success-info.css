@@ -1,0 +1,23 @@
+.popup__success-info {
+  margin: 40px auto 50px auto;
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 20px;
+  line-height: 24px;
+  max-width: 358px;
+  text-align: center;
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__success-info {
+    margin-top: 32px;
+    margin-bottom: 60px;
+    font-size: 24px;
+    line-height: 29px;
+    max-width: 358px;
+    padding: 0;
+  }
+}

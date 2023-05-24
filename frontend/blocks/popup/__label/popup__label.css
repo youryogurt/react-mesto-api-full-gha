@@ -1,0 +1,12 @@
+.popup__label {
+  width: calc(100% - 2 * 22px);
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__label {
+    width: calc(100% - 2 * 36px);
+  }
+}

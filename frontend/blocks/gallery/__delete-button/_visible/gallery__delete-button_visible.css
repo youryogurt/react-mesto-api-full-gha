@@ -1,0 +1,7 @@
+.gallery__delete-button_visible {
+  display: block;
+}
+
+.gallery__delete-button_visible:hover {
+  opacity: .6;
+}

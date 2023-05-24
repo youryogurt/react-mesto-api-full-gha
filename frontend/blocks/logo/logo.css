@@ -1,0 +1,19 @@
+.logo {
+  padding-left: 28px;
+  padding-bottom: 32px;
+  width: 104px;
+  height: auto;
+  transition: .5s all;
+}
+
+.logo:hover {
+  opacity: .5;
+}
+
+@media screen and (min-width: 1024px) {
+  .logo {
+    padding-left: 0;
+    padding-bottom: 40px;
+    width: 142px;
+  }
+}

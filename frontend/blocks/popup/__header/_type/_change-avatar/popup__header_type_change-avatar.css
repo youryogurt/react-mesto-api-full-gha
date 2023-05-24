@@ -1,0 +1,10 @@
+.popup__header_type_change-avatar {
+  align-self: flex-start;
+  padding-left: 22px;
+}
+
+@media screen and (min-width: 768px) {
+  .popup__header_type_change-avatar {
+    padding-left: 0;
+  }
+}

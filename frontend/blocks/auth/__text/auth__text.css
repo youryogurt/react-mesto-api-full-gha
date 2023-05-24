@@ -1,0 +1,17 @@
+.auth__text {
+  font-family: 'Inter', Arial, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: #CCCCCC;
+  padding: 0 0 14px 0;
+  border: none;
+  outline: none;
+  background-color: black;
+  width: 100%;
+}
+
+.auth__text:last-of-type {
+  padding-top: 30px;
+}

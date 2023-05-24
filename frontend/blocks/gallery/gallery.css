@@ -1,0 +1,22 @@
+.gallery {
+  display: grid;
+  grid-template-columns: calc(100% - 2 * 19px);
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .gallery {
+    grid-template-columns: repeat(2, calc(100% / 2 - 2 * 19px));
+    column-gap: 17px;
+    row-gap: 20px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .gallery {
+    grid-template-columns: 1fr 1fr 1fr;
+    max-width: 880px;
+  }
+}
