@@ -8,6 +8,6 @@
 
 IP 130.193.43.218
 
-Frontend https://mesto.youryogurt.nomoredomains.monste
+Frontend https://mesto.youryogurt.nomoredomains.monster
 
 Backend https://api.mesto.youryogurt.nomoredomains.rocks

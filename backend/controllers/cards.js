@@ -8,7 +8,7 @@ const NotFoundError = require('../errors/not-found-err');
 const getAllCards = async (req, res, next) => {
   try {
     const cards = await Card.find({});
-    res.send({ data: cards });
+    res.send(cards);
   } catch (err) {
     next(new InternalServerError('Произошла ошибка на сервере'));
   }
@@ -17,7 +17,7 @@ const getAllCards = async (req, res, next) => {
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
   Card.create({ name, link, owner: req.user._id })
-    .then((cards) => res.send({ data: cards }))
+    .then((cards) => res.send(cards))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при создании карточки'));
@@ -45,7 +45,7 @@ const deleteCardById = (req, res, next) => {
       if (!deletedCard) {
         throw new NotFoundError('Карточка с указанным _id не найдена');
       }
-      res.send({ data: deletedCard });
+      res.send(deletedCard);
     })
     .catch((err) => {
       if (err.name === 'CastError') {
@@ -65,7 +65,7 @@ const likeCard = (req, res, next) => {
   )
     .then((card) => {
       if (card) {
-        res.send({ data: card });
+        res.send(card);
       } else {
         next(new NotFoundError('Карточка по указанному _id не найдена'));
       }
@@ -88,7 +88,7 @@ const dislikeCard = (req, res, next) => {
   )
     .then((card) => {
       if (card) {
-        res.send({ data: card });
+        res.send(card);
       } else {
         throw new NotFoundError('Карточка не найдена');
       }

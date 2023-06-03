@@ -11,7 +11,7 @@ const ConflictError = require('../errors/conflict-err');
 const getUsers = (req, res, next) => {
   User.find({})
     .then((users) => {
-      res.send({ data: users });
+      res.send(users);
     })
     .catch(next);
 };
@@ -21,7 +21,7 @@ const getUserById = (req, res, next) => {
   User.findById({ _id: userId })
     .then((user) => {
       if (user) {
-        res.send({ data: user });
+        res.send(user);
       } else {
         next(new NotFoundError('Пользователь по указанному _id не найден'));
       }
@@ -69,7 +69,7 @@ const updateUserProfile = (req, res, next) => {
   User.findByIdAndUpdate(userId, { name, about }, { new: true, runValidators: true })
     .then((user) => {
       if (user) {
-        res.send({ data: user });
+        res.send(user);
       } else {
         next(new NotFoundError('Пользователь с указанным _id не найден'));
       }
@@ -89,7 +89,7 @@ const updateUserAvatar = (req, res, next) => {
   User.findByIdAndUpdate(userId, { avatar }, { new: true, runValidators: true })
     .then((user) => {
       if (user) {
-        res.send({ data: user });
+        res.send(user);
       } else {
         next(new NotFoundError('Пользователь с указанным _id не найден'));
       }
@@ -117,7 +117,7 @@ const getCurrentUserInfo = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => {
       if (user) {
-        res.send({ data: user });
+        res.send(user);
       } else {
         next(new NotFoundError('Пользователь с указанным _id не найден'));
       }

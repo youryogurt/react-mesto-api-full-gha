@@ -12,9 +12,15 @@ export class Api {
   }
 
   async _fetch(slug, method, body) {
-    const res = await fetch(`${this.baseUrl}/${slug}`, {
+    const token =  localStorage.getItem('jwt');
+    const headers = {
+      ...this.headers,
+      Authorization: `Bearer ${token}`
+    };
+
+    const res = await fetch(`${this.baseUrl}/${slug}`, { 
       method: method,
-      headers: this.headers,
+      headers: headers,
       body: JSON.stringify(body)
     });
     return this.handleResponse(res);
@@ -38,6 +44,7 @@ export class Api {
   }
 
   async addCard(data) {
+    // console.log(data);
     return await this._fetch('cards', 'POST', data);
   }
 
@@ -68,11 +75,7 @@ export class Api {
 }
 
 const config = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-60',
-  headers: {
-    authorization: 'aa16a549-ea43-4766-9300-1c2b0845ff0c',
-    'Content-Type': 'application/json'
-  }
+  baseUrl: 'http://localhost:3000',
 };
 
 const api = new Api(config);
