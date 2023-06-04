@@ -15,6 +15,7 @@ export class Api {
     const token =  localStorage.getItem('jwt');
     const headers = {
       ...this.headers,
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`
     };
 
@@ -44,7 +45,6 @@ export class Api {
   }
 
   async addCard(data) {
-    console.log(data);
     return await this._fetch('cards', 'POST', data);
   }
 
