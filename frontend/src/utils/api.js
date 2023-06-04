@@ -44,7 +44,7 @@ export class Api {
   }
 
   async addCard(data) {
-    // console.log(data);
+    console.log(data);
     return await this._fetch('cards', 'POST', data);
   }
 

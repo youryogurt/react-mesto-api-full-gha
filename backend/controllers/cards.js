@@ -16,6 +16,7 @@ const getAllCards = async (req, res, next) => {
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
+  console.log(req.body);
   Card.create({ name, link, owner: req.user._id })
     .then((cards) => res.send(cards))
     .catch((err) => {
