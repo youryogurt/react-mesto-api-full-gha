@@ -6,7 +6,7 @@ const User = require('../models/user');
 const secretKey = require('../config');
 
 const BadRequestError = require('../errors/bad-request-err');
-const InternalServerError = require('../errors/internal-server-err');
+// const InternalServerError = require('../errors/internal-server-err');
 const NotFoundError = require('../errors/not-found-err');
 const ConflictError = require('../errors/conflict-err');
 
@@ -32,7 +32,8 @@ const getUserById = (req, res, next) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Некорректный _id пользователя'));
       } else {
-        next(new InternalServerError('Произошла ошибка на сервере'));
+        // next(new InternalServerError('Произошла ошибка на сервере'));
+        next(new Error('Произошла ошибка на сервере'));
       }
     });
 };
@@ -60,7 +61,8 @@ const createUser = (req, res, next) => {
       } else if (err.code === 11000) {
         next(new ConflictError('Пользователь с таким email уже существует'));
       } else {
-        next(new InternalServerError('Произошла ошибка на сервере'));
+        // next(new InternalServerError('Произошла ошибка на сервере'));
+        next(new Error('Произошла ошибка на сервере'));
       }
     });
 };
@@ -80,7 +82,8 @@ const updateUserProfile = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при обновлении профиля'));
       } else {
-        next(new InternalServerError('Произошла ошибка на сервере'));
+        // next(new InternalServerError('Произошла ошибка на сервере'));
+        next(new Error('Произошла ошибка на сервере'));
       }
     });
 };
@@ -100,7 +103,8 @@ const updateUserAvatar = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при обновлении аватара'));
       } else {
-        next(new InternalServerError('Произошла ошибка на сервере'));
+        // next(new InternalServerError('Произошла ошибка на сервере'));
+        next(new Error('Произошла ошибка на сервере'));
       }
     });
 };
@@ -114,7 +118,6 @@ const login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : secretKey,
         { expiresIn: '7d' },
       );
-      // const token = jwt.sign({ _id: user._id }, secretKey, { expiresIn: '7d' });
       res.send({ token });
     })
     .catch(next);
@@ -129,12 +132,9 @@ const getCurrentUserInfo = (req, res, next) => {
         next(new NotFoundError('Пользователь с указанным _id не найден'));
       }
     })
-    .catch((err) => {
-      if (err.name === 'CastError') {
-        next(new BadRequestError('Передан некорректный _id пользователя'));
-      } else {
-        next(new InternalServerError('Произошла ошибка на сервере'));
-      }
+    .catch(() => {
+      // next(new InternalServerError('Произошла ошибка на сервере'));
+      next(new Error('Произошла ошибка на сервере'));
     });
 };
 
