@@ -16,7 +16,6 @@ const getAllCards = async (req, res, next) => {
 
 const createCard = (req, res, next) => {
   const { name, link } = req.body;
-  console.log(req.body);
   Card.create({ name, link, owner: req.user._id })
     .then((cards) => res.send(cards))
     .catch((err) => {
@@ -31,8 +30,7 @@ const createCard = (req, res, next) => {
 const deleteCardById = (req, res, next) => {
   const { cardId } = req.params;
   const userId = req.user._id;
-
-  Card.findOne({ _id: cardId }).populate(['likes', 'owner'])
+  Card.findOne({ _id: cardId })
     .then((card) => {
       if (!card) {
         throw new NotFoundError('Карточка с указанным _id не найдена');
@@ -63,7 +61,8 @@ const likeCard = (req, res, next) => {
     cardId,
     { $addToSet: { likes: req.user._id } },
     { new: true },
-  ).populate(['likes', 'owner'])
+  )
+  // .populate(['likes', 'owner'])
     .then((card) => {
       if (card) {
         res.send(card);
@@ -86,7 +85,8 @@ const dislikeCard = (req, res, next) => {
     cardId,
     { $pull: { likes: req.user._id } },
     { new: true },
-  ).populate(['likes', 'owner'])
+  )
+  // .populate(['likes', 'owner'])
     .then((card) => {
       if (card) {
         res.send(card);
