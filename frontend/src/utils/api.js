@@ -58,11 +58,11 @@ export class Api {
   }
 
   async likeCard(cardId) {
-    return await this._fetch(`cards/likes/${cardId}`, 'PUT');
+    return await this._fetch(`cards/${cardId}/likes`, 'PUT');
   }
 
   async dislikeCard(cardId) {
-    return await this._fetch(`cards/likes/${cardId}`, 'DELETE');
+    return await this._fetch(`cards/${cardId}/likes`, 'DELETE');
   }
 
   // добавила в рамках пунка 2 спринта 11
