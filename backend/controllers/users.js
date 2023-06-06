@@ -6,7 +6,6 @@ const User = require('../models/user');
 const secretKey = require('../config');
 
 const BadRequestError = require('../errors/bad-request-err');
-// const InternalServerError = require('../errors/internal-server-err');
 const NotFoundError = require('../errors/not-found-err');
 const ConflictError = require('../errors/conflict-err');
 
@@ -32,7 +31,6 @@ const getUserById = (req, res, next) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Некорректный _id пользователя'));
       } else {
-        // next(new InternalServerError('Произошла ошибка на сервере'));
         next(new Error('Произошла ошибка на сервере'));
       }
     });
@@ -61,8 +59,7 @@ const createUser = (req, res, next) => {
       } else if (err.code === 11000) {
         next(new ConflictError('Пользователь с таким email уже существует'));
       } else {
-        // next(new InternalServerError('Произошла ошибка на сервере'));
-        next(new Error('Произошла ошибка на сервере'));
+        next(err);
       }
     });
 };
@@ -82,8 +79,7 @@ const updateUserProfile = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при обновлении профиля'));
       } else {
-        // next(new InternalServerError('Произошла ошибка на сервере'));
-        next(new Error('Произошла ошибка на сервере'));
+        next(err);
       }
     });
 };
@@ -103,8 +99,7 @@ const updateUserAvatar = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при обновлении аватара'));
       } else {
-        // next(new InternalServerError('Произошла ошибка на сервере'));
-        next(new Error('Произошла ошибка на сервере'));
+        next(err);
       }
     });
 };
@@ -132,9 +127,8 @@ const getCurrentUserInfo = (req, res, next) => {
         next(new NotFoundError('Пользователь с указанным _id не найден'));
       }
     })
-    .catch(() => {
-      // next(new InternalServerError('Произошла ошибка на сервере'));
-      next(new Error('Произошла ошибка на сервере'));
+    .catch((err) => {
+      next(err);
     });
 };
 

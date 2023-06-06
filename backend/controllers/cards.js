@@ -2,7 +2,6 @@ const Card = require('../models/card');
 
 const BadRequestError = require('../errors/bad-request-err');
 const ForbiddenError = require('../errors/forbidden-err');
-// const InternalServerError = require('../errors/internal-server-err');
 const NotFoundError = require('../errors/not-found-err');
 
 const getAllCards = async (req, res, next) => {
@@ -10,8 +9,7 @@ const getAllCards = async (req, res, next) => {
     const cards = await Card.find({});
     res.send(cards);
   } catch (err) {
-    // next(new InternalServerError('Произошла ошибка на сервере'));
-    next(new Error('Произошла ошибка на сервере'));
+    next(err);
   }
 };
 
@@ -23,8 +21,7 @@ const createCard = (req, res, next) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при создании карточки'));
       } else {
-        // next(new InternalServerError('Произошла ошибка на сервере'));
-        next(new Error('Произошла ошибка на сервере'));
+        next(err);
       }
     });
 };
@@ -75,8 +72,7 @@ const likeCard = (req, res, next) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные'));
       } else {
-        // next(new InternalServerError('Произошла ошибка на сервере'));
-        next(new Error('Произошла ошибка на сервере'));
+        next(err);
       }
     });
 };
@@ -101,8 +97,7 @@ const dislikeCard = (req, res, next) => {
       } else if (err instanceof NotFoundError) {
         next(err);
       } else {
-        // next(new InternalServerError(err.message));
-        next(new Error('Произошла ошибка на сервере'));
+        next(err);
       }
     });
 };
